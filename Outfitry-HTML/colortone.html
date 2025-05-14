@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Color Tones and Emotions - Outfitry</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);
+      color: #333;
+    }
+    .container {
+      display: flex;
+      min-height: 100vh;
+      background: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .header {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      border-bottom: 1px solid #eee;
+      background: #fff;
+    }
+    .header img {
+      height: 40px;
+    }
+    .sidebar {
+      width: 200px;
+      padding: 20px;
+      padding-top: 80px;
+      background: #f8f9fa;
+      border-right: 1px solid #eee;
+    }
+    .nav {
+      display: flex;
+      flex-direction: column;
+    }
+    .nav a {
+      text-decoration: none;
+      color: #555;
+      margin: 10px 0;
+      transition: color 0.3s;
+    }
+    .nav a:hover {
+      color: #0066cc;
+    }
+    .content {
+      flex: 1;
+      padding: 30px;
+      padding-top: 80px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .article-header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .article-header img {
+      width: 100%;
+      max-height: 400px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+    .article-header h1 {
+      font-size: 2em;
+      color: #333;
+      margin: 10px 0;
+    }
+    .article-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.9em;
+      color: #666;
+      margin-bottom: 20px;
+    }
+    .article-meta .likes {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .article-meta .likes:hover {
+      cursor: pointer;
+      color: #ff69b4;
+    }
+    .article-meta .comments {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .article-content {
+      line-height: 1.6;
+      color: #444;
+    }
+    .article-content h2 {
+      color: #0066cc;
+      margin-top: 30px;
+    }
+    .article-content h3 {
+      color: #333;
+      margin-top: 20px;
+    }
+    .article-content p, .article-content ul {
+      margin: 10px 0;
+    }
+    .article-content ul {
+      padding-left: 20px;
+    }
+    .article-content li {
+      margin: 5px 0;
+    }
+    .hashtags {
+      margin-top: 20px;
+      font-size: 0.9em;
+      color: #0066cc;
+    }
+    .hashtags a {
+      text-decoration: none;
+      color: #0066cc;
+      margin-right: 10px;
+    }
+    .hashtags a:hover {
+      color: #004d99;
+    }
+    .comments-section {
+      margin-top: 40px;
+    }
+    .comments-section h3 {
+      font-size: 1.2em;
+      color: #333;
+      margin-bottom: 20px;
+    }
+    .comment {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 20px;
+      padding: 10px;
+      background: #f8f9fa;
+      border-radius: 5px;
+    }
+    .comment img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+    .comment-content {
+      flex: 1;
+    }
+    .comment-content p {
+      margin: 0;
+      color: #555;
+    }
+    .comment-content .username {
+      font-weight: bold;
+      color: #333;
+    }
+    .comment-content .date {
+      font-size: 0.8em;
+      color: #888;
+    }
+    .comment-content .likes {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.9em;
+      color: #666;
+      margin-top: 5px;
+    }
+    .comment-content .likes:hover {
+      cursor: pointer;
+      color: #ff69b4;
+    }
+    .reply-section {
+      margin-top: 10px;
+      padding-left: 55px;
+    }
+    .reply-section .reply-input textarea {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 0.9em;
+      resize: vertical;
+      box-sizing: border-box;
+      min-height: 80px;
+    }
+    .reply-section .reply-input button {
+      background: #0066cc;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 5px;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+      margin-top: 5px;
+    }
+    .reply-section .reply-input button:hover {
+      background: #004d99;
+    }
+    .reply {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+      padding: 8px;
+      background: #e9ecef;
+      border-radius: 5px;
+    }
+    .reply img {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+    }
+    .reply-content {
+      flex: 1;
+    }
+    .comment-input {
+      margin-bottom: 20px;
+    }
+    .comment-input textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1em;
+      resize: vertical;
+      box-sizing: border-box;
+      min-height: 100px;
+    }
+    .comment-input button {
+      background: #0066cc;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      color: #fff;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+      margin-top: 10px;
+    }
+    .comment-input button:hover {
+      background: #004d99;
+    }
+    .load-more {
+      text-align: center;
+      margin-top: 20px;
+    }
+    .load-more a {
+      text-decoration: none;
+      color: #0066cc;
+      font-weight: bold;
+    }
+    .load-more a:hover {
+      color: #004d99;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <img src="images/logo.jpg" alt="Outfitry Logo">
+  </div>
+  <div class="container">
+    <div class="sidebar">
+      <div class="nav">
+        <a href="index.html">Homepage</a>
+        <a href="matching.html">Matching Outfit</a>
+        <a href="content.html">Content</a>
+        <a href="community.html">Community</a>
+        <a href="custom.html">Custom Clothing</a>
+        <a href="company.html">Company</a>
+        <a href="pricing.html">Pricing</a>
+      </div>
+    </div>
+    <div class="content">
+      <div class="article-header">
+        <img src="colorful_friends.jpg" alt="Friends in colorful outfits">
+        <h1>Color Tones and Emotions: The Hidden Psychology Behind Every Hue 🌈</h1>
+        <div class="article-meta">
+          <span>By Outfitry Team</span>
+          <div>
+            <span class="likes">❤️ 99</span>
+            <span class="comments">💬 10</span>
+          </div>
+        </div>
+      </div>
+      <div class="article-content">
+        <p>Hey there, design enthusiasts and color lovers! Ever wondered why you feel calm in a blue room or why fast-food chains love red and yellow? None of this is coincidence—colors have an incredible power to influence our emotions and behaviors on a deeply psychological level! 😊</p>
+        <p>Let's dive into how different colors make us feel and why major brands choose them so carefully.</p>
+ 
+        <h2>🔴 Red: Hot, Exciting, and Full of Energy!</h2>
+        <p>Red is like the "rebel child" of all colors—impossible to ignore! This powerful color:</p>
+        <ul>
+          <li>Speeds up your heart rate (yes, really—research backs this up!)</li>
+          <li>Increases appetite (no wonder McDonald's, KFC, and other food brands use it)</li>
+          <li>Communicates love and passion (think Valentine's Day everything)</li>
+          <li>Creates urgency (ever noticed how SALE!! signs are almost always bright red?)</li>
+        </ul>
+        <p>But careful! Too much red can make you feel stressed, pressured, or even angry—like being constantly shouted at 😅</p>
+ 
+        <h2>🔵 Blue: Trust Packaged in a Color</h2>
+        <p>Ever noticed why financial brands like PayPal, social media giants like Facebook, or tech companies often use blue? It's because blue makes us feel:</p>
+        <ul>
+          <li>Trustworthy (who would deposit money in a bank with a neon red logo?)</li>
+          <li>Calm and focused (exactly what you want when checking your account balance)</li>
+          <li>Professional and competent (think about navy blue business suits)</li>
+          <li>Honest (why do we associate "true blue" with loyalty?)</li>
+        </ul>
+        <p>I love using blue in workspaces because it helps keep my mind peaceful and focused. Highly recommended! 💙</p>
+ 
+        <h2>🟢 Green: Refreshing as Coming Home</h2>
+        <p>Green is the color most connected to nature and the easiest for human eyes to process! It reminds us of:</p>
+        <ul>
+          <li>Freshness (imagine walking into a garden filled with plants)</li>
+          <li>Growth and hope (like new sprouts emerging from branches)</li>
+          <li>Balance and peace (similar to sitting under a big tree)</li>
+          <li>Sustainability (no surprise eco-friendly brands primarily use this color)</li>
+        </ul>
+        <p>Quick tip: Feeling stressed? Look at something green—plants or even nature pictures—for a few minutes. Your anxiety will actually decrease! 🌿</p>
+ 
+        <h2>🟡 Yellow: Happiness in Color Form</h2>
+        <p>Yellow is like that high-energy friend who's always smiling:</p>
+        <ul>
+          <li>Bright and cheerful (just like the smiley emoji!)</li>
+          <li>Optimistic (morning sunshine—who doesn't feel good?)</li>
+          <li>Creativity-boosting (try jotting down ideas on yellow Post-its)</li>
+          <li>Energizing (ever noticed how yellow kitchens feel lively?)</li>
+        </ul>
+        <p>But like an overly enthusiastic friend, sometimes it's exhausting! Too much yellow can make you feel irritated or anxious. Use it in moderation ✨</p>
+ 
+        <h2>🟣 Purple: Intriguing Mystery</h2>
+        <p>Did you know? Purple used to be exclusively for royalty because it was incredibly expensive to produce! That's why purple still gives us feelings of:</p>
+        <ul>
+          <li>Luxury (think of royal purple robes)</li>
+          <li>Mystery and intrigue (cosmetic brands love this color)</li>
+          <li>Imagination and creativity (Starbucks often uses purple in special campaigns)</li>
+          <li>Wisdom and sharpness (perhaps why some universities adopt purple as their color)</li>
+        </ul>
+        <p>I tend to use purple when I want to create a special atmosphere or need something to stand out. Give it a try! 👑</p>
+ 
+        <h2>🟠 Orange: Fun and Adventure</h2>
+        <p>Orange, the lovechild of passionate red and cheerful yellow, represents:</p>
+        <ul>
+          <li>Vibrance and playfulness (Fanta, Nickelodeon use it as their primary color)</li>
+          <li>Decision stimulation (notice how "Buy Now" or "Sign Up" buttons are often orange?)</li>
+          <li>Friendliness and approachability (doesn't orange give you warm feelings?)</li>
+          <li>Appetite enhancement (many restaurants use soft orange in their décor)</li>
+        </ul>
+        <p>Orange is a brilliant choice for brands wanting to appear modern, accessible, and energetic! 🧡</p>
+ 
+        <h2>💓 Pink: Gentle but Powerful</h2>
+        <p>Pink has been misunderstood for too long! Not just for little girls anymore, it's a color with profound meaning:</p>
+        <ul>
+          <li>Tenderness and love (pink roses communicate gentle affection)</li>
+          <li>Hope and optimism (breast cancer foundations use pink as their symbol)</li>
+          <li>Soft confidence (hot pink or fuchsia especially conveys this)</li>
+          <li>Aggression reduction (some prisons paint holding cells light pink because research shows it reduces aggressive behavior!)</li>
+        </ul>
+        <p>I love wearing deep pink on days when I need gentle confidence. Try it! 🌸</p>
+ 
+        <h2>⚫ Black: Simple but Powerful</h2>
+        <p>Black never goes out of style because it's:</p>
+        <ul>
+          <li>Elegant and modern (black clothing = timeless fashion)</li>
+          <li>Powerful and decisive (black cars look commanding)</li>
+          <li>Mysterious and sexy (because black both conceals and reveals)</li>
+          <li>Perfectly minimal (look at Apple and other luxury brands)</li>
+        </ul>
+        <p>But beware! Too much black can feel depressing or lifeless 🖤</p>
+ 
+        <h2>⚪ White: Less is More</h2>
+        <p>White is minimal beauty:</p>
+        <ul>
+          <li>Clean and pure (why are wedding dresses white?)</li>
+          <li>Simple and modern (minimalist homes are filled with white)</li>
+          <li>New beginnings (blank white paper represents fresh opportunities)</li>
+          <li>Spacious and open (white rooms appear larger than dark ones)</li>
+        </ul>
+        <p>Pro tip: Use white as a background when you want other colors to pop! ✨</p>
+ 
+        <h2>How to Rock Colors in Life and Design</h2>
+        <p>Check out these simple techniques to use color effectively:</p>
+ 
+        <h3>1. Know Your Color Groups</h3>
+        <p><strong>Warm tones</strong> (red, orange, yellow):</p>
+        <ul>
+          <li>Want a space to feel lively? Use warm tones!</li>
+          <li>Need to stimulate conversation at a party? Decorate with warm tones!</li>
+          <li>Want people to feel hungry? (Restaurant owners, this is for you!)</li>
+        </ul>
+        <p><strong>Cool tones</strong> (blue, green, purple):</p>
+        <ul>
+          <li>Need focus for work? Surround yourself with cool tones!</li>
+          <li>Want a relaxing bedroom? Choose soft cool tones!</li>
+          <li>Need your website to look trustworthy? Cool tones are your answer!</li>
+        </ul>
+ 
+        <h3>2. The 60-30-10 Rule: Simple but Effective!</h3>
+        <p>Here's a secret professional designers use:</p>
+        <ul>
+          <li>60% dominant color (most of the space, like walls)</li>
+          <li>30% secondary color (large furniture pieces)</li>
+          <li>10% accent color (decorative items, small accessories)</li>
+        </ul>
+        <p>This technique works for home décor, website design, or even outfit planning!</p>
+ 
+        <h3>3. Colors and Brand Emotions</h3>
+        <p>Take a look at brands around us:</p>
+        <ul>
+          <li><strong>Coca-Cola</strong> uses red to stimulate energy and excitement</li>
+          <li><strong>Facebook</strong> uses blue for trustworthiness</li>
+          <li><strong>Starbucks</strong> uses green for calm refreshment</li>
+          <li><strong>McDonald's</strong> uses yellow and red to stimulate hunger and urgency</li>
+        </ul>
+ 
+        <h2>Conclusion: Color is a Language Without Words</h2>
+        <p>Colors are more powerful than we think! They communicate with us on a subconscious level, affecting our emotions and even purchasing decisions! Next time you choose a color for anything—clothes, house paint, or even presentation backgrounds—think about the emotion you want to convey and select a color that matches that intention.</p>
+        <p>Finally, remember that rules exist to be known, but art exists to be creative! Sometimes breaking color rules creates the most amazing work!</p>
+        <p>What's your favorite color, and how does it make you feel? Share in the comments below! 🌈✨</p>
+ 
+        <div class="hashtags">
+          <a href="#">#ColorPsychology</a>
+          <a href="#">#Design</a>
+          <a href="#">#ColorsAndEmotions</a>
+          <a href="#">#ColorTips</a>
+        </div>
+      </div>
+ 
+      <div class="comments-section">
+        <h3>Comments 💬</h3>
+        <div class="comment" id="comment-1">
+          <img src="user1.jpg" alt="ColorDoctor">
+          <div class="comment-content">
+            <p><span class="username">ColorDoctor</span></p>
+            <p>My favorite color is green, so calming and relaxing! 💚</p>
+            <p class="date">2025/05/16</p>
+            <span class="likes" onclick="likeComment('comment-1')">❤️ <span class="like-count">5</span></span>
+          </div>
+          <div class="reply-section">
+            <div class="reply-input">
+              <textarea placeholder="Write a reply..."></textarea>
+              <button onclick="addReply('comment-1', 'user3.jpg', 'ColorLover', '2025/05/14 14:20')">Send</button>
+            </div>
+            <div id="replies-1" class="replies"></div>
+          </div>
+        </div>
+        <div class="comment" id="comment-2">
+          <img src="user2.jpg" alt="PrettyColor">
+          <div class="comment-content">
+            <p><span class="username">PrettyColor</span></p>
+            <p>I love red so much! It makes me feel energized every time I wear it ❤️</p>
+            <p class="date">2025/05/19</p>
+            <span class="likes" onclick="likeComment('comment-2')">❤️ <span class="like-count">3</span></span>
+          </div>
+          <div class="reply-section">
+            <div class="reply-input">
+              <textarea placeholder="Write a reply..."></textarea>
+              <button onclick="addReply('comment-2', 'user3.jpg', 'ColorLover', '2025/05/14 14:20')">Send</button>
+            </div>
+            <div id="replies-2" class="replies"></div>
+          </div>
+        </div>
+        <div class="comment-input">
+          <textarea id="comment-text" placeholder="Write your comment here..."></textarea>
+          <button onclick="submitComment()">Submit Comment</button>
+        </div>
+        <div id="new-comments"></div>
+        <div class="load-more">
+          <a href="#">Load More Comments ➡️</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    function likeComment(commentId) {
+      const comment = document.getElementById(commentId);
+      const likeCountElement = comment.querySelector('.like-count');
+      let currentLikes = parseInt(likeCountElement.textContent);
+      likeCountElement.textContent = currentLikes + 1;
+      comment.querySelector('.likes').style.color = '#ff69b4';
+    }
+ 
+    function addReply(commentId, imgSrc, username, date) {
+      const replyText = document.querySelector(`#${commentId} .reply-input textarea`).value;
+      if (replyText.trim() === "") {
+        alert("Please write a reply first!");
+        return;
+      }
+ 
+      const repliesDiv = document.getElementById(`replies-${commentId}`);
+      const replyDiv = document.createElement('div');
+      replyDiv.className = 'reply';
+      replyDiv.innerHTML = `
+        <img src="${imgSrc}" alt="${username}">
+        <div class="reply-content">
+          <p><span class="username">${username}</span></p>
+          <p>${replyText}</p>
+          <p class="date">${date}</p>
+          <span class="likes" onclick="likeReply(this)">❤️ <span class="like-count">0</span></span>
+        </div>
+      `;
+      repliesDiv.appendChild(replyDiv);
+      document.querySelector(`#${commentId} .reply-input textarea`).value = "";
+    }
+ 
+    function likeReply(likeElement) {
+      const likeCountElement = likeElement.querySelector('.like-count');
+      let currentLikes = parseInt(likeCountElement.textContent);
+      likeCountElement.textContent = currentLikes + 1;
+      likeElement.style.color = '#ff69b4';
+    }
+ 
+    function submitComment() {
+      const commentText = document.getElementById('comment-text').value;
+      if (commentText.trim() === "") {
+        alert("Please write a comment first!");
+        return;
+      }
+ 
+      const newCommentId = `comment-${Date.now()}`;
+      const newCommentsDiv = document.getElementById('new-comments');
+      const commentDiv = document.createElement('div');
+      commentDiv.className = 'comment';
+      commentDiv.id = newCommentId;
+      commentDiv.innerHTML = `
+        <img src="user3.jpg" alt="NewUser">
+        <div class="comment-content">
+          <p><span class="username">NewUser</span></p>
+          <p>${commentText}</p>
+          <p class="date">Wednesday, May 14, 2025 02:26 PM +07</p>
+          <span class="likes" onclick="likeComment('${newCommentId}')">❤️ <span class="like-count">0</span></span>
+        </div>
+        <div class="reply-section">
+          <div class="reply-input">
+            <textarea placeholder="Write a reply..."></textarea>
+            <button onclick="addReply('${newCommentId}', 'user3.jpg', 'NewUser', 'Wednesday, May 14, 2025 02:26 PM +07')">Send</button>
+          </div>
+          <div id="replies-${newCommentId}" class="replies"></div>
+        </div>
+      `;
+      newCommentsDiv.insertBefore(commentDiv, newCommentsDiv.firstChild);
+      document.getElementById('comment-text').value = "";
+      alert("Your comment has been submitted! Thank you for sharing 😊");
+    }
+  </script>
+</body>
+</html>
+ 
